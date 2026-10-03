@@ -1,43 +1,8 @@
 "use strict";
 
-/*
-=========================================================
- HAVEN — ADOPTION INTEREST QUEUE
- Hardened Vanilla JavaScript Version
-=========================================================
+// Haven - Adoption Interest Queue
 
-Security principles:
-
-1. Treat localStorage as UNTRUSTED input.
-2. Validate every record loaded from storage.
-3. Validate every form value before state mutation.
-4. Escape every dynamic value before putting it into innerHTML.
-5. Never trust status values from localStorage.
-6. Never trust IDs from DOM attributes.
-7. Use safe mailto/tel construction.
-8. Keep state controlled and predictable.
-9. Handle malformed/corrupted storage safely.
-10. Simulate analytics only after successful primary actions.
-
-IMPORTANT:
-Client-side JavaScript cannot provide complete security.
-Real production applications also need server-side:
-- authentication
-- authorization
-- input validation
-- database validation
-- rate limiting
-- CSRF protection where applicable
-- security headers
-- logging/monitoring
-=========================================================
-*/
-
-
-/* =====================================================
-   SECURITY CONFIGURATION
-===================================================== */
-
+// Basic limits used throughout the app.
 const SECURITY = Object.freeze({
 
   MAX_NAME_LENGTH: 80,
@@ -59,11 +24,9 @@ const SECURITY = Object.freeze({
 });
 
 
-/* =====================================================
-   INITIAL DATA
-===================================================== */
-
+// Initial data shown when there is no saved data yet.
 const seedApplicants = [
+
   {
     id: 1,
     name: "Rahul Sharma",
@@ -123,21 +86,16 @@ const seedApplicants = [
     status: "Pending",
     date: "2026-09-24"
   }
+
 ];
 
 
-/* =====================================================
-   STORAGE
-===================================================== */
-
+// localStorage key
 const storageKey =
   "haven-adoption-applicants-v1";
 
 
-/* =====================================================
-   DOM HELPERS
-===================================================== */
-
+// Small DOM helper
 const $ = (selector) =>
   document.querySelector(selector);
 
@@ -154,20 +112,7 @@ const addForm =
   $("#add-form");
 
 
-/* =====================================================
-   HTML ESCAPING
-===================================================== */
-
-/*
-IMPORTANT:
-
-This is output encoding.
-
-We do NOT depend on this function for validation.
-
-Validation and output encoding are two different layers.
-*/
-
+// Escape values before putting them inside HTML.
 function escapeHtml(value) {
 
   return String(value ?? "").replace(
@@ -196,17 +141,17 @@ function escapeHtml(value) {
 }
 
 
-/* =====================================================
-   TEXT NORMALIZATION
-===================================================== */
-
+// Clean up text before using it.
 function normalizeText(value, maxLength) {
 
   return String(value ?? "")
 
     .normalize("NFKC")
 
-    .replace(/[\u0000-\u0008\u000B\u000C\u000E-\u001F\u007F]/g, "")
+    .replace(
+      /[\u0000-\u0008\u000B\u000C\u000E-\u001F\u007F]/g,
+      ""
+    )
 
     .trim()
 
@@ -215,10 +160,7 @@ function normalizeText(value, maxLength) {
 }
 
 
-/* =====================================================
-   NAME VALIDATION
-===================================================== */
-
+// Name helpers
 function normalizeName(value) {
 
   return normalizeText(
@@ -246,10 +188,7 @@ function isValidName(value) {
 }
 
 
-/* =====================================================
-   EMAIL VALIDATION
-===================================================== */
-
+// Email helpers
 function normalizeEmail(value) {
 
   return normalizeText(
@@ -266,7 +205,9 @@ function isValidEmail(value) {
     typeof value !== "string" ||
     value.length > SECURITY.MAX_EMAIL_LENGTH
   ) {
+
     return false;
+
   }
 
 
@@ -277,10 +218,7 @@ function isValidEmail(value) {
 }
 
 
-/* =====================================================
-   PHONE VALIDATION
-===================================================== */
-
+// Phone helpers
 function normalizePhone(value) {
 
   return String(value ?? "")
@@ -297,10 +235,7 @@ function isValidPhone(value) {
 }
 
 
-/* =====================================================
-   ANIMAL VALIDATION
-===================================================== */
-
+// Animal name helpers
 function normalizeAnimal(value) {
 
   return normalizeText(
@@ -328,10 +263,7 @@ function isValidAnimal(value) {
 }
 
 
-/* =====================================================
-   STATUS VALIDATION
-===================================================== */
-
+// Status helpers
 function isValidStatus(status) {
 
   return SECURITY.ALLOWED_STATUSES.includes(
@@ -350,17 +282,16 @@ function normalizeStatus(status) {
 }
 
 
-/* =====================================================
-   DATE VALIDATION
-===================================================== */
-
+// Date helpers
 function isValidDateString(value) {
 
   if (
     typeof value !== "string" ||
     !/^\d{4}-\d{2}-\d{2}$/.test(value)
   ) {
+
     return false;
+
   }
 
 
@@ -391,10 +322,7 @@ function normalizeDate(value) {
 }
 
 
-/* =====================================================
-   ID VALIDATION
-===================================================== */
-
+// IDs should always be positive safe integers.
 function isValidId(value) {
 
   return (
@@ -408,10 +336,7 @@ function isValidId(value) {
 }
 
 
-/* =====================================================
-   APPLICANT RECORD VALIDATION
-===================================================== */
-
+// Check one applicant before using it.
 function sanitizeApplicantRecord(record) {
 
   if (
@@ -419,7 +344,9 @@ function sanitizeApplicantRecord(record) {
     typeof record !== "object" ||
     Array.isArray(record)
   ) {
+
     return null;
+
   }
 
 
@@ -514,10 +441,7 @@ function sanitizeApplicantRecord(record) {
 }
 
 
-/* =====================================================
-   VALIDATE ENTIRE STORAGE
-===================================================== */
-
+// Validate all records loaded from storage.
 function sanitizeApplicantList(value) {
 
   if (!Array.isArray(value)) {
@@ -542,10 +466,7 @@ function sanitizeApplicantList(value) {
       .filter(Boolean);
 
 
-  /*
-  Remove duplicate IDs.
-  */
-
+  // Remove duplicate IDs.
   const seenIds =
     new Set();
 
@@ -570,10 +491,7 @@ function sanitizeApplicantList(value) {
 }
 
 
-/* =====================================================
-   LOAD STORAGE SAFELY
-===================================================== */
-
+// Read localStorage without assuming that its contents are safe.
 function loadApplicants() {
 
   try {
@@ -597,11 +515,7 @@ function loadApplicants() {
       sanitizeApplicantList(parsed);
 
 
-    /*
-    If storage exists but is completely invalid,
-    fall back to seed data.
-    */
-
+    // If everything in storage is broken, start with the seed data.
     if (
       parsed.length > 0 &&
       safeApplicants.length === 0
@@ -638,10 +552,7 @@ let applicants =
   loadApplicants();
 
 
-/* =====================================================
-   APPLICATION STATE
-===================================================== */
-
+// Current UI state.
 const state = {
 
   search: "",
@@ -657,18 +568,12 @@ const state = {
 };
 
 
-/* =====================================================
-   PERSIST DATA SAFELY
-===================================================== */
-
+// Save the current list.
 function persist() {
 
   try {
 
-    /*
-    Validate state AGAIN before writing.
-    */
-
+    // Check the data again before saving it.
     const safeApplicants =
       sanitizeApplicantList(
         applicants
@@ -700,10 +605,7 @@ function persist() {
 }
 
 
-/* =====================================================
-   ANALYTICS SIMULATION
-===================================================== */
-
+// Simple analytics placeholder.
 function analytics(eventName) {
 
   console.info(
@@ -713,10 +615,7 @@ function analytics(eventName) {
 }
 
 
-/* =====================================================
-   DATE FORMATTER
-===================================================== */
-
+// Format dates for the UI.
 function formatDate(date) {
 
   if (!isValidDateString(date)) {
@@ -741,10 +640,7 @@ function formatDate(date) {
 }
 
 
-/* =====================================================
-   INITIALS
-===================================================== */
-
+// Create initials for the avatar.
 function initials(name) {
 
   return normalizeName(name)
@@ -763,10 +659,7 @@ function initials(name) {
 }
 
 
-/* =====================================================
-   RENDER STATISTICS
-===================================================== */
-
+// Update the numbers shown above the table.
 function renderStats() {
 
   const totalCount =
@@ -809,10 +702,7 @@ function renderStats() {
 }
 
 
-/* =====================================================
-   FILTER + SORT
-===================================================== */
-
+// Apply the current search, status filter and sort order.
 function filteredApplicants() {
 
   const query =
@@ -873,10 +763,7 @@ function filteredApplicants() {
 }
 
 
-/* =====================================================
-   STATUS BADGE
-===================================================== */
-
+// Build the status badge.
 function createStatusBadge(status) {
 
   const safeStatus =
@@ -909,10 +796,7 @@ function createStatusBadge(status) {
 }
 
 
-/* =====================================================
-   SAFE MAILTO
-===================================================== */
-
+// Build a mailto link only after checking the email.
 function safeMailto(email) {
 
   const safeEmail =
@@ -933,10 +817,7 @@ function safeMailto(email) {
 }
 
 
-/* =====================================================
-   SAFE TELEPHONE
-===================================================== */
-
+// Build a phone link only after checking the number.
 function safeTel(phone) {
 
   const safePhone =
@@ -955,10 +836,7 @@ function safeTel(phone) {
 }
 
 
-/* =====================================================
-   TABLE ROW
-===================================================== */
-
+// Create a table row.
 function createTableRow(person) {
 
   const safeId =
@@ -1100,10 +978,7 @@ function createTableRow(person) {
 }
 
 
-/* =====================================================
-   MOBILE CARD
-===================================================== */
-
+// Mobile version of the applicant row.
 function createMobileCard(person) {
 
   const safeId =
@@ -1262,10 +1137,7 @@ function createMobileCard(person) {
 }
 
 
-/* =====================================================
-   LOADING STATE
-===================================================== */
-
+// Loading screen
 function renderLoadingState() {
 
   results.innerHTML = `
@@ -1298,10 +1170,7 @@ function renderLoadingState() {
 }
 
 
-/* =====================================================
-   ERROR STATE
-===================================================== */
-
+// Error screen
 function renderErrorState() {
 
   results.innerHTML = `
@@ -1388,10 +1257,7 @@ function renderErrorState() {
 }
 
 
-/* =====================================================
-   EMPTY STATE
-===================================================== */
-
+// Empty search/filter result
 function renderEmptyState() {
 
   const addButton =
@@ -1478,10 +1344,7 @@ function renderEmptyState() {
 }
 
 
-/* =====================================================
-   QUEUE RENDER
-===================================================== */
-
+// Main queue renderer
 function renderQueue() {
 
   if (!results) {
@@ -1633,10 +1496,7 @@ function renderQueue() {
 }
 
 
-/* =====================================================
-   RETRY
-===================================================== */
-
+// Fake retry request for the demo.
 function retryLoad() {
 
   state.loading = true;
@@ -1661,10 +1521,7 @@ function retryLoad() {
 }
 
 
-/* =====================================================
-   TOAST
-===================================================== */
-
+// Toast messages
 let toastTimeout = null;
 
 
@@ -1707,10 +1564,7 @@ function showToast(message) {
 }
 
 
-/* =====================================================
-   FORM FIELD MAP
-===================================================== */
-
+// Form field IDs
 const fieldIds = {
 
   name: "applicant-name",
@@ -1724,10 +1578,7 @@ const fieldIds = {
 };
 
 
-/* =====================================================
-   FORM VALIDATION
-===================================================== */
-
+// Return a validation message for a form field.
 function errorFor(field) {
 
   const input =
@@ -1826,10 +1677,7 @@ function errorFor(field) {
 }
 
 
-/* =====================================================
-   VALIDATE FIELD
-===================================================== */
-
+// Validate one field and update its error message.
 function validateField(field) {
 
   const error =
@@ -1866,10 +1714,7 @@ function validateField(field) {
 }
 
 
-/* =====================================================
-   OPEN ADD MODAL
-===================================================== */
-
+// Open add applicant modal.
 function openAdd() {
 
   if (!addDialog || !addForm) {
@@ -1921,10 +1766,7 @@ function openAdd() {
 }
 
 
-/* =====================================================
-   CLOSE ADD MODAL
-===================================================== */
-
+// Close add applicant modal.
 function closeAdd() {
 
   if (
@@ -1939,10 +1781,7 @@ function closeAdd() {
 }
 
 
-/* =====================================================
-   EVENT DELEGATION
-===================================================== */
-
+// Handle buttons created dynamically inside the queue.
 document.addEventListener(
   "click",
   (event) => {
@@ -2044,10 +1883,7 @@ document.addEventListener(
 );
 
 
-/* =====================================================
-   ADD FORM SUBMIT
-===================================================== */
-
+// Add applicant form
 if (addForm) {
 
   addForm.addEventListener(
@@ -2089,10 +1925,7 @@ if (addForm) {
         new FormData(addForm);
 
 
-      /*
-      Normalize BEFORE state mutation.
-      */
-
+      // Normalize values before changing the state.
       const name =
         normalizeName(
           formData.get("name")
@@ -2123,12 +1956,7 @@ if (addForm) {
         );
 
 
-      /*
-      Defense-in-depth:
-      validate values again even though
-      UI validation already happened.
-      */
-
+      // Validate again before creating the record.
       if (
         !isValidName(name) ||
         !isValidEmail(email) ||
@@ -2168,11 +1996,7 @@ if (addForm) {
       };
 
 
-      /*
-      Validate complete object BEFORE
-      inserting into application state.
-      */
-
+      // Make sure the complete record is valid.
       const safeApplicant =
         sanitizeApplicantRecord(
           newApplicant
@@ -2195,10 +2019,7 @@ if (addForm) {
       );
 
 
-      /*
-      Enforce storage limit.
-      */
-
+      // Keep local storage from growing indefinitely.
       applicants =
         applicants.slice(
           0,
@@ -2261,10 +2082,6 @@ if (addForm) {
       renderQueue();
 
 
-      /*
-      Telemetry simulation.
-      */
-
       analytics(
         "User added an adoption application"
       );
@@ -2280,10 +2097,7 @@ if (addForm) {
 }
 
 
-/* =====================================================
-   REAL-TIME FORM VALIDATION
-===================================================== */
-
+// Validate fields while the user is filling the form.
 Object.keys(fieldIds)
   .forEach((field) => {
 
@@ -2337,14 +2151,12 @@ Object.keys(fieldIds)
   });
 
 
-/* =====================================================
-   DETAILS MODAL
-===================================================== */
-
+// Currently selected application.
 let selectedApplicantId =
   null;
 
 
+// Open the application details modal.
 function openDetails(id) {
 
   if (!isValidId(id)) {
@@ -2585,10 +2397,7 @@ function openDetails(id) {
 }
 
 
-/* =====================================================
-   SAVE STATUS
-===================================================== */
-
+// Save a changed application status.
 const saveStatusButton =
   $("#save-status");
 
@@ -2644,11 +2453,7 @@ if (saveStatusButton) {
         select.value;
 
 
-      /*
-      NEVER trust values just because
-      they came from a <select>.
-      */
-
+      // A select value can still be changed through the browser.
       if (!isValidStatus(newStatus)) {
 
         showToast(
@@ -2664,10 +2469,7 @@ if (saveStatusButton) {
         newStatus;
 
 
-      /*
-      Validate entire object again.
-      */
-
+      // Check the record after the update.
       const safePerson =
         sanitizeApplicantRecord(
           person
@@ -2726,10 +2528,7 @@ if (saveStatusButton) {
 }
 
 
-/* =====================================================
-   SEARCH
-===================================================== */
-
+// Search
 const searchInput =
   $("#search");
 
@@ -2755,10 +2554,7 @@ if (searchInput) {
 }
 
 
-/* =====================================================
-   STATUS FILTER
-===================================================== */
-
+// Status filter
 const statusFilter =
   $("#status-filter");
 
@@ -2790,10 +2586,7 @@ if (statusFilter) {
 }
 
 
-/* =====================================================
-   SORT
-===================================================== */
-
+// Sort order
 const sortFilter =
   $("#sort-filter");
 
@@ -2822,10 +2615,7 @@ if (sortFilter) {
 }
 
 
-/* =====================================================
-   ONLINE / OFFLINE
-===================================================== */
-
+// Handle going offline.
 window.addEventListener(
   "offline",
   () => {
@@ -2844,6 +2634,7 @@ window.addEventListener(
 );
 
 
+// Handle connection coming back.
 window.addEventListener(
   "online",
   () => {
@@ -2860,15 +2651,7 @@ window.addEventListener(
 );
 
 
-/* =====================================================
-   STORAGE EVENT
-===================================================== */
-
-/*
-If another browser tab modifies localStorage,
-reload and validate that data instead of trusting it.
-*/
-
+// If another tab changes the stored data, reload it.
 window.addEventListener(
   "storage",
   (event) => {
@@ -2894,10 +2677,7 @@ window.addEventListener(
 );
 
 
-/* =====================================================
-   KEYBOARD ESCAPE SUPPORT
-===================================================== */
-
+// Close dialogs with Escape.
 document.addEventListener(
   "keydown",
   (event) => {
@@ -2940,18 +2720,11 @@ document.addEventListener(
 );
 
 
-/* =====================================================
-   INITIAL RENDER
-===================================================== */
-
+// First render
 renderStats();
 
 renderQueue();
 
-
-/* =====================================================
-   SECURITY DEVELOPMENT CHECK
-===================================================== */
 
 console.info(
   "[Security] Adoption Interest Queue initialized with client-side input validation, output encoding, storage validation and controlled state."
