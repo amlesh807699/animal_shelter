@@ -1,48 +1,38 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <meta
     name="description"
     content="Haven Shelter adoption interest management queue."
-  />
+  >
 
   <title>Adoption Interest Queue — Haven</title>
 
-  <!-- Font Awesome -->
   <link
     rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css"
-  />
+  >
 
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
   <div id="root">
 
-    <!-- =========================
-         APPLICATION SHELL
-    ========================== -->
     <div class="app-shell">
 
-      <!-- =========================
-           SIDEBAR
-      ========================== -->
       <aside class="sidebar" aria-label="Workspace navigation">
 
-        <!-- BRAND -->
         <a
           class="brand"
           href="#overview"
           aria-label="Haven, go to overview"
         >
-
           <span class="brand-mark">
             <i
               class="fa-solid fa-paw icon"
@@ -53,51 +43,37 @@
           <span>
             haven<span class="brand-period">.</span>
           </span>
-
         </a>
-
 
         <div class="workspace-label">
           SHELTER WORKSPACE
         </div>
 
-
-        <!-- NAVIGATION -->
         <nav class="nav-links" aria-label="Main navigation">
 
-          <!-- OVERVIEW -->
           <a
             class="nav-link"
             href="#overview"
           >
-
             <i
               class="fa-solid fa-table-cells icon"
               aria-hidden="true"
             ></i>
 
-            <span>
-              Overview
-            </span>
-
+            <span>Overview</span>
           </a>
 
-
-          <!-- INTEREST QUEUE -->
           <a
             class="nav-link active"
             href="#interest-queue"
             aria-current="page"
           >
-
             <i
               class="fa-solid fa-list-check icon"
               aria-hidden="true"
             ></i>
 
-            <span>
-              Interest queue
-            </span>
+            <span>Interest queue</span>
 
             <span
               class="nav-count"
@@ -105,43 +81,31 @@
             >
               6
             </span>
-
           </a>
 
         </nav>
 
-
         <div class="sidebar-spacer"></div>
 
-
-        <!-- SIDEBAR NOTE -->
         <div class="sidebar-note">
 
           <span class="note-icon">
-
             <i
               class="fa-solid fa-paw icon"
               aria-hidden="true"
             ></i>
-
           </span>
 
           <div>
-
-            <strong>
-              Every connection matters.
-            </strong>
+            <strong>Every connection matters.</strong>
 
             <p>
               Keep every adoption journey moving forward.
             </p>
-
           </div>
 
         </div>
 
-
-        <!-- PROFILE -->
         <div class="sidebar-profile">
 
           <div class="profile-avatar">
@@ -149,52 +113,35 @@
           </div>
 
           <div class="profile-copy">
-
-            <strong>
-              Shelter Team
-            </strong>
-
-            <span>
-              Staff workspace
-            </span>
-
+            <strong>Shelter Team</strong>
+            <span>Staff workspace</span>
           </div>
 
           <span class="profile-more">
-
             <i
               class="fa-solid fa-ellipsis icon"
               aria-hidden="true"
             ></i>
-
           </span>
 
         </div>
 
       </aside>
 
-
-      <!-- =========================
-           MAIN CONTENT
-      ========================== -->
       <main
         class="main-content"
         id="overview"
       >
 
-        <!-- TOP BAR -->
         <div class="topbar">
 
-          <!-- MOBILE BRAND -->
           <div class="mobile-brand">
 
             <span class="brand-mark">
-
               <i
                 class="fa-solid fa-paw icon"
                 aria-hidden="true"
               ></i>
-
             </span>
 
             <span>
@@ -203,24 +150,12 @@
 
           </div>
 
-
-          <!-- BREADCRUMB -->
           <div class="breadcrumb">
-
             Workspace
-
-            <span>
-              /
-            </span>
-
-            <strong>
-              Adoption interest
-            </strong>
-
+            <span>/</span>
+            <strong>Adoption interest</strong>
           </div>
 
-
-          <!-- TOPBAR RIGHT -->
           <div class="topbar-right">
 
             <span class="topbar-label">
@@ -238,23 +173,15 @@
 
         </div>
 
-
-        <!-- =========================
-             CONTENT
-        ========================== -->
         <div class="content-wrap">
 
-          <!-- PAGE HEADER -->
           <header class="page-header">
 
             <div>
 
               <div class="eyebrow">
-
                 <span class="eyebrow-dot"></span>
-
                 ADOPTION MANAGEMENT
-
               </div>
 
               <h1>
@@ -267,31 +194,21 @@
 
             </div>
 
-
-            <!-- ADD APPLICANT -->
             <button
               class="button button-primary header-add"
               type="button"
               data-open-add
             >
-
               <i
                 class="fa-solid fa-plus icon"
                 aria-hidden="true"
               ></i>
 
-              <span>
-                Add Applicant
-              </span>
-
+              <span>Add Applicant</span>
             </button>
 
           </header>
 
-
-          <!-- =========================
-               OVERVIEW
-          ========================== -->
           <section
             class="overview-section"
             aria-labelledby="overview-heading"
@@ -303,31 +220,23 @@
                 Overview
               </h2>
 
-              <span>
-                At a glance
-              </span>
+              <span>At a glance</span>
 
             </div>
 
-
             <div class="stats-grid">
 
-              <!-- TOTAL -->
               <article class="stat-card">
 
                 <div class="stat-top">
 
-                  <span>
-                    Total Applications
-                  </span>
+                  <span>Total Applications</span>
 
                   <span class="stat-icon">
-
                     <i
                       class="fa-solid fa-list-check icon"
                       aria-hidden="true"
                     ></i>
-
                   </span>
 
                 </div>
@@ -342,23 +251,17 @@
 
               </article>
 
-
-              <!-- PENDING -->
               <article class="stat-card">
 
                 <div class="stat-top">
 
-                  <span>
-                    Pending
-                  </span>
+                  <span>Pending</span>
 
                   <span class="stat-icon">
-
                     <i
                       class="fa-regular fa-calendar icon"
                       aria-hidden="true"
                     ></i>
-
                   </span>
 
                 </div>
@@ -368,32 +271,23 @@
                 </strong>
 
                 <div class="stat-caption">
-
                   <span class="caption-dot pending-dot"></span>
-
                   Awaiting first review
-
                 </div>
 
               </article>
 
-
-              <!-- APPROVED -->
               <article class="stat-card">
 
                 <div class="stat-top">
 
-                  <span>
-                    Approved
-                  </span>
+                  <span>Approved</span>
 
                   <span class="stat-icon">
-
                     <i
                       class="fa-solid fa-check icon"
                       aria-hidden="true"
                     ></i>
-
                   </span>
 
                 </div>
@@ -403,11 +297,8 @@
                 </strong>
 
                 <div class="stat-caption">
-
                   <span class="caption-dot approved-dot"></span>
-
                   Ready for next steps
-
                 </div>
 
               </article>
@@ -416,10 +307,6 @@
 
           </section>
 
-
-          <!-- =========================
-               INTEREST QUEUE
-          ========================== -->
           <section
             class="queue-section"
             id="interest-queue"
@@ -431,7 +318,6 @@
               <div>
 
                 <h2 id="queue-title">
-
                   Interest Queue
 
                   <span
@@ -440,7 +326,6 @@
                   >
                     0
                   </span>
-
                 </h2>
 
                 <p>
@@ -449,22 +334,15 @@
 
               </div>
 
-
               <div class="queue-heading-meta">
-
                 SAVED ON THIS DEVICE
-
                 <span class="live-dot"></span>
-
               </div>
 
             </div>
 
-
-            <!-- TOOLBAR -->
             <div class="queue-toolbar">
 
-              <!-- SEARCH -->
               <label class="search-field">
 
                 <span class="sr-only">
@@ -481,15 +359,12 @@
                   type="search"
                   placeholder="Search applicants..."
                   autocomplete="off"
-                />
+                >
 
               </label>
 
-
-              <!-- FILTERS -->
               <div class="filter-group">
 
-                <!-- STATUS -->
                 <label class="select-wrap">
 
                   <span class="sr-only">
@@ -498,19 +373,19 @@
 
                   <select id="status-filter">
 
-                    <option>
+                    <option value="All Statuses">
                       All Statuses
                     </option>
 
-                    <option>
+                    <option value="Pending">
                       Pending
                     </option>
 
-                    <option>
+                    <option value="Contacted">
                       Contacted
                     </option>
 
-                    <option>
+                    <option value="Approved">
                       Approved
                     </option>
 
@@ -523,8 +398,6 @@
 
                 </label>
 
-
-                <!-- SORT -->
                 <label class="select-wrap sort-wrap">
 
                   <span class="sr-only">
@@ -554,8 +427,6 @@
 
             </div>
 
-
-            <!-- DYNAMIC QUEUE -->
             <div
               id="queue-results"
               aria-live="polite"
@@ -564,8 +435,6 @@
 
           </section>
 
-
-          <!-- FOOTER -->
           <footer class="page-footer">
 
             <span>
@@ -584,10 +453,6 @@
 
     </div>
 
-
-    <!-- =========================
-         ADD APPLICANT MODAL
-    ========================== -->
     <dialog
       id="add-dialog"
       class="modal"
@@ -603,14 +468,11 @@
         <div class="modal-head">
 
           <div class="modal-icon">
-
             <i
               class="fa-solid fa-plus icon"
               aria-hidden="true"
             ></i>
-
           </div>
-
 
           <button
             type="button"
@@ -618,16 +480,13 @@
             data-close-add
             aria-label="Close dialog"
           >
-
             <i
               class="fa-solid fa-xmark icon"
               aria-hidden="true"
             ></i>
-
           </button>
 
         </div>
-
 
         <h2 id="add-title">
           Add Adoption Interest
@@ -640,20 +499,13 @@
           Enter the applicant’s details to add them to the queue.
         </p>
 
-
         <div class="form-grid">
 
-          <!-- NAME -->
           <div class="field full">
 
             <label for="applicant-name">
-
               Applicant Name
-
-              <span aria-hidden="true">
-                *
-              </span>
-
+              <span aria-hidden="true">*</span>
             </label>
 
             <input
@@ -664,7 +516,7 @@
               autocomplete="name"
               aria-describedby="name-error"
               required
-            />
+            >
 
             <span
               class="field-error"
@@ -673,18 +525,11 @@
 
           </div>
 
-
-          <!-- EMAIL -->
           <div class="field full">
 
             <label for="applicant-email">
-
               Email
-
-              <span aria-hidden="true">
-                *
-              </span>
-
+              <span aria-hidden="true">*</span>
             </label>
 
             <input
@@ -695,7 +540,7 @@
               autocomplete="email"
               aria-describedby="email-error"
               required
-            />
+            >
 
             <span
               class="field-error"
@@ -704,18 +549,11 @@
 
           </div>
 
-
-          <!-- PHONE -->
           <div class="field full">
 
             <label for="applicant-phone">
-
               Phone
-
-              <span aria-hidden="true">
-                *
-              </span>
-
+              <span aria-hidden="true">*</span>
             </label>
 
             <input
@@ -727,7 +565,7 @@
               autocomplete="tel"
               aria-describedby="phone-error"
               required
-            />
+            >
 
             <span
               class="field-error"
@@ -736,18 +574,11 @@
 
           </div>
 
-
-          <!-- ANIMAL -->
           <div class="field">
 
             <label for="animal-name">
-
               Animal Name
-
-              <span aria-hidden="true">
-                *
-              </span>
-
+              <span aria-hidden="true">*</span>
             </label>
 
             <input
@@ -757,7 +588,7 @@
               placeholder="e.g. Max"
               aria-describedby="animal-error"
               required
-            />
+            >
 
             <span
               class="field-error"
@@ -766,8 +597,6 @@
 
           </div>
 
-
-          <!-- STATUS -->
           <div class="field">
 
             <label for="applicant-status">
@@ -780,19 +609,17 @@
                 id="applicant-status"
                 name="status"
               >
-
-                <option>
+                <option value="Pending">
                   Pending
                 </option>
 
-                <option>
+                <option value="Contacted">
                   Contacted
                 </option>
 
-                <option>
+                <option value="Approved">
                   Approved
                 </option>
-
               </select>
 
               <i
@@ -806,8 +633,6 @@
 
         </div>
 
-
-        <!-- MODAL ACTIONS -->
         <div class="modal-actions">
 
           <button
@@ -822,14 +647,12 @@
             type="submit"
             class="button button-primary"
           >
-
             <i
               class="fa-solid fa-plus icon"
               aria-hidden="true"
             ></i>
 
             Add Applicant
-
           </button>
 
         </div>
@@ -838,10 +661,6 @@
 
     </dialog>
 
-
-    <!-- =========================
-         DETAILS MODAL
-    ========================== -->
     <dialog
       id="detail-dialog"
       class="modal detail-modal"
@@ -851,14 +670,11 @@
       <div class="modal-head">
 
         <div class="modal-icon">
-
           <i
             class="fa-solid fa-list-check icon"
             aria-hidden="true"
           ></i>
-
         </div>
-
 
         <button
           type="button"
@@ -866,16 +682,13 @@
           data-close-detail
           aria-label="Close details"
         >
-
           <i
             class="fa-solid fa-xmark icon"
             aria-hidden="true"
           ></i>
-
         </button>
 
       </div>
-
 
       <h2 id="detail-title">
         Application details
@@ -885,9 +698,7 @@
         Review this adoption interest application.
       </p>
 
-
       <div id="detail-content"></div>
-
 
       <div class="modal-actions">
 
@@ -904,24 +715,18 @@
           class="button button-primary"
           id="save-status"
         >
-
           <i
             class="fa-solid fa-floppy-disk icon"
             aria-hidden="true"
           ></i>
 
           Save changes
-
         </button>
 
       </div>
 
     </dialog>
 
-
-    <!-- =========================
-         TOAST
-    ========================== -->
     <div
       class="toast"
       id="toast"
@@ -929,18 +734,15 @@
       aria-live="polite"
       hidden
     >
-
       <i
         class="fa-solid fa-check icon"
         aria-hidden="true"
       ></i>
 
       <span id="toast-message"></span>
-
     </div>
 
   </div>
-
 
   <script src="script.js"></script>
 
