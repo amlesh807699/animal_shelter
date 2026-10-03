@@ -1,24 +1,948 @@
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
+  <meta
+    name="description"
+    content="Haven Shelter adoption interest management queue."
+  />
 
-    <title>Adoption Interest Queue</title>
+  <title>Adoption Interest Queue — Haven</title>
 
-    <link rel="stylesheet" href="style.css">
+  <!-- Font Awesome -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css"
+  />
+
+  <link rel="stylesheet" href="style.css" />
 </head>
 
 <body>
 
-    <main id="app" aria-label="Adoption Interest Queue">
-        <!-- JavaScript will render the application here -->
-    </main>
+  <div id="root">
 
-    <script src="app.js"></script>
+    <!-- =========================
+         APPLICATION SHELL
+    ========================== -->
+    <div class="app-shell">
+
+      <!-- =========================
+           SIDEBAR
+      ========================== -->
+      <aside class="sidebar" aria-label="Workspace navigation">
+
+        <!-- BRAND -->
+        <a
+          class="brand"
+          href="#overview"
+          aria-label="Haven, go to overview"
+        >
+
+          <span class="brand-mark">
+            <i
+              class="fa-solid fa-paw icon"
+              aria-hidden="true"
+            ></i>
+          </span>
+
+          <span>
+            haven<span class="brand-period">.</span>
+          </span>
+
+        </a>
+
+
+        <div class="workspace-label">
+          SHELTER WORKSPACE
+        </div>
+
+
+        <!-- NAVIGATION -->
+        <nav class="nav-links" aria-label="Main navigation">
+
+          <!-- OVERVIEW -->
+          <a
+            class="nav-link"
+            href="#overview"
+          >
+
+            <i
+              class="fa-solid fa-table-cells icon"
+              aria-hidden="true"
+            ></i>
+
+            <span>
+              Overview
+            </span>
+
+          </a>
+
+
+          <!-- INTEREST QUEUE -->
+          <a
+            class="nav-link active"
+            href="#interest-queue"
+            aria-current="page"
+          >
+
+            <i
+              class="fa-solid fa-list-check icon"
+              aria-hidden="true"
+            ></i>
+
+            <span>
+              Interest queue
+            </span>
+
+            <span
+              class="nav-count"
+              id="nav-count"
+            >
+              6
+            </span>
+
+          </a>
+
+        </nav>
+
+
+        <div class="sidebar-spacer"></div>
+
+
+        <!-- SIDEBAR NOTE -->
+        <div class="sidebar-note">
+
+          <span class="note-icon">
+
+            <i
+              class="fa-solid fa-paw icon"
+              aria-hidden="true"
+            ></i>
+
+          </span>
+
+          <div>
+
+            <strong>
+              Every connection matters.
+            </strong>
+
+            <p>
+              Keep every adoption journey moving forward.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <!-- PROFILE -->
+        <div class="sidebar-profile">
+
+          <div class="profile-avatar">
+            ST
+          </div>
+
+          <div class="profile-copy">
+
+            <strong>
+              Shelter Team
+            </strong>
+
+            <span>
+              Staff workspace
+            </span>
+
+          </div>
+
+          <span class="profile-more">
+
+            <i
+              class="fa-solid fa-ellipsis icon"
+              aria-hidden="true"
+            ></i>
+
+          </span>
+
+        </div>
+
+      </aside>
+
+
+      <!-- =========================
+           MAIN CONTENT
+      ========================== -->
+      <main
+        class="main-content"
+        id="overview"
+      >
+
+        <!-- TOP BAR -->
+        <div class="topbar">
+
+          <!-- MOBILE BRAND -->
+          <div class="mobile-brand">
+
+            <span class="brand-mark">
+
+              <i
+                class="fa-solid fa-paw icon"
+                aria-hidden="true"
+              ></i>
+
+            </span>
+
+            <span>
+              haven<span class="brand-period">.</span>
+            </span>
+
+          </div>
+
+
+          <!-- BREADCRUMB -->
+          <div class="breadcrumb">
+
+            Workspace
+
+            <span>
+              /
+            </span>
+
+            <strong>
+              Adoption interest
+            </strong>
+
+          </div>
+
+
+          <!-- TOPBAR RIGHT -->
+          <div class="topbar-right">
+
+            <span class="topbar-label">
+              SHELTER OPERATIONS
+            </span>
+
+            <span
+              class="topbar-avatar"
+              aria-label="Shelter Team account"
+            >
+              ST
+            </span>
+
+          </div>
+
+        </div>
+
+
+        <!-- =========================
+             CONTENT
+        ========================== -->
+        <div class="content-wrap">
+
+          <!-- PAGE HEADER -->
+          <header class="page-header">
+
+            <div>
+
+              <div class="eyebrow">
+
+                <span class="eyebrow-dot"></span>
+
+                ADOPTION MANAGEMENT
+
+              </div>
+
+              <h1>
+                Adoption Interest Queue
+              </h1>
+
+              <p>
+                Manage and track adoption interest applications
+              </p>
+
+            </div>
+
+
+            <!-- ADD APPLICANT -->
+            <button
+              class="button button-primary header-add"
+              type="button"
+              data-open-add
+            >
+
+              <i
+                class="fa-solid fa-plus icon"
+                aria-hidden="true"
+              ></i>
+
+              <span>
+                Add Applicant
+              </span>
+
+            </button>
+
+          </header>
+
+
+          <!-- =========================
+               OVERVIEW
+          ========================== -->
+          <section
+            class="overview-section"
+            aria-labelledby="overview-heading"
+          >
+
+            <div class="section-heading">
+
+              <h2 id="overview-heading">
+                Overview
+              </h2>
+
+              <span>
+                At a glance
+              </span>
+
+            </div>
+
+
+            <div class="stats-grid">
+
+              <!-- TOTAL -->
+              <article class="stat-card">
+
+                <div class="stat-top">
+
+                  <span>
+                    Total Applications
+                  </span>
+
+                  <span class="stat-icon">
+
+                    <i
+                      class="fa-solid fa-list-check icon"
+                      aria-hidden="true"
+                    ></i>
+
+                  </span>
+
+                </div>
+
+                <strong id="total-count">
+                  0
+                </strong>
+
+                <div class="stat-caption">
+                  All adoption interest records
+                </div>
+
+              </article>
+
+
+              <!-- PENDING -->
+              <article class="stat-card">
+
+                <div class="stat-top">
+
+                  <span>
+                    Pending
+                  </span>
+
+                  <span class="stat-icon">
+
+                    <i
+                      class="fa-regular fa-calendar icon"
+                      aria-hidden="true"
+                    ></i>
+
+                  </span>
+
+                </div>
+
+                <strong id="pending-count">
+                  0
+                </strong>
+
+                <div class="stat-caption">
+
+                  <span class="caption-dot pending-dot"></span>
+
+                  Awaiting first review
+
+                </div>
+
+              </article>
+
+
+              <!-- APPROVED -->
+              <article class="stat-card">
+
+                <div class="stat-top">
+
+                  <span>
+                    Approved
+                  </span>
+
+                  <span class="stat-icon">
+
+                    <i
+                      class="fa-solid fa-check icon"
+                      aria-hidden="true"
+                    ></i>
+
+                  </span>
+
+                </div>
+
+                <strong id="approved-count">
+                  0
+                </strong>
+
+                <div class="stat-caption">
+
+                  <span class="caption-dot approved-dot"></span>
+
+                  Ready for next steps
+
+                </div>
+
+              </article>
+
+            </div>
+
+          </section>
+
+
+          <!-- =========================
+               INTEREST QUEUE
+          ========================== -->
+          <section
+            class="queue-section"
+            id="interest-queue"
+            aria-labelledby="queue-title"
+          >
+
+            <div class="queue-heading">
+
+              <div>
+
+                <h2 id="queue-title">
+
+                  Interest Queue
+
+                  <span
+                    class="heading-count"
+                    id="heading-count"
+                  >
+                    0
+                  </span>
+
+                </h2>
+
+                <p>
+                  View and manage all adoption interest applications.
+                </p>
+
+              </div>
+
+
+              <div class="queue-heading-meta">
+
+                SAVED ON THIS DEVICE
+
+                <span class="live-dot"></span>
+
+              </div>
+
+            </div>
+
+
+            <!-- TOOLBAR -->
+            <div class="queue-toolbar">
+
+              <!-- SEARCH -->
+              <label class="search-field">
+
+                <span class="sr-only">
+                  Search applicants
+                </span>
+
+                <i
+                  class="fa-solid fa-magnifying-glass icon"
+                  aria-hidden="true"
+                ></i>
+
+                <input
+                  id="search"
+                  type="search"
+                  placeholder="Search applicants..."
+                  autocomplete="off"
+                />
+
+              </label>
+
+
+              <!-- FILTERS -->
+              <div class="filter-group">
+
+                <!-- STATUS -->
+                <label class="select-wrap">
+
+                  <span class="sr-only">
+                    Filter by status
+                  </span>
+
+                  <select id="status-filter">
+
+                    <option>
+                      All Statuses
+                    </option>
+
+                    <option>
+                      Pending
+                    </option>
+
+                    <option>
+                      Contacted
+                    </option>
+
+                    <option>
+                      Approved
+                    </option>
+
+                  </select>
+
+                  <i
+                    class="fa-solid fa-chevron-down icon"
+                    aria-hidden="true"
+                  ></i>
+
+                </label>
+
+
+                <!-- SORT -->
+                <label class="select-wrap sort-wrap">
+
+                  <span class="sr-only">
+                    Sort applications
+                  </span>
+
+                  <select id="sort-filter">
+
+                    <option value="newest">
+                      Newest first
+                    </option>
+
+                    <option value="oldest">
+                      Oldest first
+                    </option>
+
+                  </select>
+
+                  <i
+                    class="fa-solid fa-chevron-down icon"
+                    aria-hidden="true"
+                  ></i>
+
+                </label>
+
+              </div>
+
+            </div>
+
+
+            <!-- DYNAMIC QUEUE -->
+            <div
+              id="queue-results"
+              aria-live="polite"
+              aria-busy="false"
+            ></div>
+
+          </section>
+
+
+          <!-- FOOTER -->
+          <footer class="page-footer">
+
+            <span>
+              Haven Shelter Management
+            </span>
+
+            <span>
+              Thoughtful care, every step of the way.
+            </span>
+
+          </footer>
+
+        </div>
+
+      </main>
+
+    </div>
+
+
+    <!-- =========================
+         ADD APPLICANT MODAL
+    ========================== -->
+    <dialog
+      id="add-dialog"
+      class="modal"
+      aria-labelledby="add-title"
+      aria-describedby="add-description"
+    >
+
+      <form
+        id="add-form"
+        novalidate
+      >
+
+        <div class="modal-head">
+
+          <div class="modal-icon">
+
+            <i
+              class="fa-solid fa-plus icon"
+              aria-hidden="true"
+            ></i>
+
+          </div>
+
+
+          <button
+            type="button"
+            class="icon-button close-button"
+            data-close-add
+            aria-label="Close dialog"
+          >
+
+            <i
+              class="fa-solid fa-xmark icon"
+              aria-hidden="true"
+            ></i>
+
+          </button>
+
+        </div>
+
+
+        <h2 id="add-title">
+          Add Adoption Interest
+        </h2>
+
+        <p
+          id="add-description"
+          class="modal-description"
+        >
+          Enter the applicant’s details to add them to the queue.
+        </p>
+
+
+        <div class="form-grid">
+
+          <!-- NAME -->
+          <div class="field full">
+
+            <label for="applicant-name">
+
+              Applicant Name
+
+              <span aria-hidden="true">
+                *
+              </span>
+
+            </label>
+
+            <input
+              id="applicant-name"
+              name="name"
+              type="text"
+              placeholder="e.g. Rahul Sharma"
+              autocomplete="name"
+              aria-describedby="name-error"
+              required
+            />
+
+            <span
+              class="field-error"
+              id="name-error"
+            ></span>
+
+          </div>
+
+
+          <!-- EMAIL -->
+          <div class="field full">
+
+            <label for="applicant-email">
+
+              Email
+
+              <span aria-hidden="true">
+                *
+              </span>
+
+            </label>
+
+            <input
+              id="applicant-email"
+              name="email"
+              type="email"
+              placeholder="e.g. rahul@example.com"
+              autocomplete="email"
+              aria-describedby="email-error"
+              required
+            />
+
+            <span
+              class="field-error"
+              id="email-error"
+            ></span>
+
+          </div>
+
+
+          <!-- PHONE -->
+          <div class="field full">
+
+            <label for="applicant-phone">
+
+              Phone
+
+              <span aria-hidden="true">
+                *
+              </span>
+
+            </label>
+
+            <input
+              id="applicant-phone"
+              name="phone"
+              type="tel"
+              inputmode="numeric"
+              placeholder="10-digit phone number"
+              autocomplete="tel"
+              aria-describedby="phone-error"
+              required
+            />
+
+            <span
+              class="field-error"
+              id="phone-error"
+            ></span>
+
+          </div>
+
+
+          <!-- ANIMAL -->
+          <div class="field">
+
+            <label for="animal-name">
+
+              Animal Name
+
+              <span aria-hidden="true">
+                *
+              </span>
+
+            </label>
+
+            <input
+              id="animal-name"
+              name="animal"
+              type="text"
+              placeholder="e.g. Max"
+              aria-describedby="animal-error"
+              required
+            />
+
+            <span
+              class="field-error"
+              id="animal-error"
+            ></span>
+
+          </div>
+
+
+          <!-- STATUS -->
+          <div class="field">
+
+            <label for="applicant-status">
+              Status
+            </label>
+
+            <div class="select-wrap form-select">
+
+              <select
+                id="applicant-status"
+                name="status"
+              >
+
+                <option>
+                  Pending
+                </option>
+
+                <option>
+                  Contacted
+                </option>
+
+                <option>
+                  Approved
+                </option>
+
+              </select>
+
+              <i
+                class="fa-solid fa-chevron-down icon"
+                aria-hidden="true"
+              ></i>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- MODAL ACTIONS -->
+        <div class="modal-actions">
+
+          <button
+            type="button"
+            class="button button-secondary"
+            data-close-add
+          >
+            Cancel
+          </button>
+
+          <button
+            type="submit"
+            class="button button-primary"
+          >
+
+            <i
+              class="fa-solid fa-plus icon"
+              aria-hidden="true"
+            ></i>
+
+            Add Applicant
+
+          </button>
+
+        </div>
+
+      </form>
+
+    </dialog>
+
+
+    <!-- =========================
+         DETAILS MODAL
+    ========================== -->
+    <dialog
+      id="detail-dialog"
+      class="modal detail-modal"
+      aria-labelledby="detail-title"
+    >
+
+      <div class="modal-head">
+
+        <div class="modal-icon">
+
+          <i
+            class="fa-solid fa-list-check icon"
+            aria-hidden="true"
+          ></i>
+
+        </div>
+
+
+        <button
+          type="button"
+          class="icon-button close-button"
+          data-close-detail
+          aria-label="Close details"
+        >
+
+          <i
+            class="fa-solid fa-xmark icon"
+            aria-hidden="true"
+          ></i>
+
+        </button>
+
+      </div>
+
+
+      <h2 id="detail-title">
+        Application details
+      </h2>
+
+      <p class="modal-description">
+        Review this adoption interest application.
+      </p>
+
+
+      <div id="detail-content"></div>
+
+
+      <div class="modal-actions">
+
+        <button
+          type="button"
+          class="button button-secondary"
+          data-close-detail
+        >
+          Close
+        </button>
+
+        <button
+          type="button"
+          class="button button-primary"
+          id="save-status"
+        >
+
+          <i
+            class="fa-solid fa-floppy-disk icon"
+            aria-hidden="true"
+          ></i>
+
+          Save changes
+
+        </button>
+
+      </div>
+
+    </dialog>
+
+
+    <!-- =========================
+         TOAST
+    ========================== -->
+    <div
+      class="toast"
+      id="toast"
+      role="status"
+      aria-live="polite"
+      hidden
+    >
+
+      <i
+        class="fa-solid fa-check icon"
+        aria-hidden="true"
+      ></i>
+
+      <span id="toast-message"></span>
+
+    </div>
+
+  </div>
+
+
+  <script src="script.js"></script>
+
 </body>
 </html>
