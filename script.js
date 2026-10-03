@@ -1,8 +1,8 @@
 "use strict";
 
-// Haven - Adoption Interest Queue
 
-// Basic limits used throughout the app.
+
+
 const SECURITY = Object.freeze({
 
   MAX_NAME_LENGTH: 80,
@@ -336,7 +336,7 @@ function isValidId(value) {
 }
 
 
-// Check one applicant before using it.
+
 function sanitizeApplicantRecord(record) {
 
   if (
@@ -441,7 +441,7 @@ function sanitizeApplicantRecord(record) {
 }
 
 
-// Validate all records loaded from storage.
+
 function sanitizeApplicantList(value) {
 
   if (!Array.isArray(value)) {
@@ -491,7 +491,6 @@ function sanitizeApplicantList(value) {
 }
 
 
-// Read localStorage without assuming that its contents are safe.
 function loadApplicants() {
 
   try {
@@ -515,7 +514,7 @@ function loadApplicants() {
       sanitizeApplicantList(parsed);
 
 
-    // If everything in storage is broken, start with the seed data.
+    
     if (
       parsed.length > 0 &&
       safeApplicants.length === 0
@@ -615,7 +614,6 @@ function analytics(eventName) {
 }
 
 
-// Format dates for the UI.
 function formatDate(date) {
 
   if (!isValidDateString(date)) {
